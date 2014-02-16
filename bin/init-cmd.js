@@ -9,30 +9,27 @@ var path    = require('path');
 var fs      = Promise.promisifyAll(require('fs'));
 
 
+var createMigrationDir = createFolder('db/migrations');
+var createDbDir = createFolder('db');
+
 module.exports = function(params) {
   console.log('initializing migrations');
   //create the db folder if it exists
-  return createDbDirectory(params);
+  return createDbDir(params)
+    .then(createMigrationDir);
 
 };
 
-
-function createMigrationFolder(params) {
-  return fs.existsAsync(path.join('.', 'db', 'migrations')).then(function(exists) {
-    if (exists) { return null; } 
-    else {
-      return fs.mkdir('db/migrations');
-    }
-  });
+function createFolder(folderPath) {
+  return function(params) {
+    return fs.existsAsync(folderPath).then(function(exists) {
+      if (exists) { return null; } 
+      else {
+        return fs.mkdir(folderPath).then(function() {
+          return params;
+        });
+      }
+    });
+  };
 }
-
-function createDbDirectory(params) {
- return fs.existsAsync('db').then(function(exists) {
-    if (exists) { return null; } 
-    else {
-      return fs.mkdir('db');
-    }
- }).then(createMigrationFolder);
-}
-
 
