@@ -13,5 +13,13 @@
     "database"
   ],
   "author": "Peter de Croos <cultofmetatron@aumlogic.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "knex": "~0.5.6",
+    "bluebird": "~1.0.5"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "should": "~3.1.2"
+  }
 }
