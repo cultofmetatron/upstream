@@ -1,0 +1,1 @@
+var Promise = require('bluebird');
