@@ -1,0 +1,17 @@
+{
+  "name": "upstream",
+  "version": "0.0.0",
+  "description": "a migration framwork built on knex",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "keywords": [
+    "migration",
+    "bluebird",
+    "promise",
+    "database"
+  ],
+  "author": "Peter de Croos <cultofmetatron@aumlogic.com>",
+  "license": "MIT"
+}
