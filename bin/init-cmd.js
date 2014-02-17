@@ -17,13 +17,12 @@ module.exports = function(params) {
   //create the db folder if it exists
   return createDbDir(params)
     .then(createMigrationDir);
-
 };
 
 function createFolder(folderPath) {
   return function(params) {
     return fs.existsAsync(folderPath).then(function(exists) {
-      if (exists) { return null; } 
+      if (exists) { return params; }
       else {
         return fs.mkdir(folderPath).then(function() {
           return params;

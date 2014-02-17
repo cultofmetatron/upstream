@@ -19,3 +19,11 @@ migration framework for node - built on knex
 }
 ```
 
+```
+upstream init
+```
+initializes a db and db/migrations folder and a db/config.js where 
+database access information is stored.
+
+
+
