@@ -16,7 +16,8 @@ module.exports = function(params) {
   console.log('initializing migrations');
   //create the db folder if it exists
   return createDbDir(params)
-    .then(createMigrationDir);
+    .then(createMigrationDir)
+    .then(createFile(['..', 'boilers', 'config.json'], 'db/config.json'));
 };
 
 function createFolder(folderPath) {
@@ -24,7 +25,7 @@ function createFolder(folderPath) {
     return fs.existsAsync(folderPath).then(function(exists) {
       if (exists) { return params; }
       else {
-        return fs.mkdir(folderPath).then(function() {
+        return fs.mkdirAsync(folderPath).then(function() {
           return params;
         });
       }
@@ -32,3 +33,19 @@ function createFolder(folderPath) {
   };
 }
 
+function createFile(boilerSource, folderPath) {
+  return function(params) {
+    console.log('its getting here');
+    return fs.existsAsync(folderPath).then(function(exists) {
+      console.log('exists?', exists);
+      if (exists) { return params; }
+      else {
+        return fs.readFileAsync(path.join.apply(path, [__dirname].concat(boilerSource)), 'utf8')
+          .then(function(data) {
+            console.log('data', data);
+            return fs.writeFileAsync(folderPath, data);
+          }).then(function() { return params; });
+      }
+    });
+  };
+}
