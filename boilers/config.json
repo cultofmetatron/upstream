@@ -1,4 +1,11 @@
 {
-  
+  "client": "database_type",
+  "connection": {
+    "host"     : "127.0.0.1",
+    "user"     : "your_database_user",
+    "password" : "your_database_password",
+    "database" : "databse_name",
+    "charset"  : "utf8"
+  }
 
 }
