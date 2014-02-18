@@ -9,12 +9,12 @@ var path    = require('path');
 var fs      = Promise.promisifyAll(require('fs'));
 
 
-var createMigrationDir = createFolder('db/migrations');
-var createDbDir = createFolder('db');
 
 module.exports = function(params) {
   console.log('initializing migrations');
   //create the db folder if it exists
+  var createMigrationDir = createFolder('db/migrations');
+  var createDbDir = createFolder('db');
   return createDbDir(params)
     .then(createMigrationDir)
     .then(createFile(['..', 'boilers', 'config.json'], 'db/config.json'));
